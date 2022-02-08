@@ -5968,7 +5968,7 @@ const _sfc_main$3 = {
     email.value = localStorage.getItem("email");
     function postComment() {
       axios.post("/api/v0/comments", {
-        articleID: document.getElementById("app").dataset.articleId,
+        articleID,
         parentID: (() => {
           if (props.comment && props.comment.parentID) {
             return props.comment.parentID;

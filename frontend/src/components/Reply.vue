@@ -1,4 +1,5 @@
 <script setup>
+import { articleID } from '../main'
 import { inject, ref } from 'vue'
 import axios from 'axios'
 import md5 from 'md5'
@@ -19,7 +20,7 @@ email.value = localStorage.getItem('email')
 
 function postComment() {
     axios.post('/api/v0/comments', {
-        articleID: document.getElementById('app').dataset.articleId,
+        articleID,
         parentID: (() => {
             if (props.comment && props.comment.parentID) {
                 return props.comment.parentID
