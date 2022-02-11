@@ -6004,7 +6004,7 @@ const _sfc_main$3 = {
           withDirectives(createBaseVNode("input", {
             required: "",
             type: "text",
-            class: "flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mb-2 sm:mr-2 sm:mb-0",
+            class: "flex-1 rounded-md border-gray-300 shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mb-2 sm:mr-2 sm:mb-0",
             placeholder: "\u79F0\u547C",
             "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => name.value = $event)
           }, null, 512), [
@@ -6013,7 +6013,7 @@ const _sfc_main$3 = {
           withDirectives(createBaseVNode("input", {
             required: "",
             type: "email",
-            class: "flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
+            class: "flex-1 rounded-md border-gray-300 shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
             placeholder: "\u90AE\u7BB1",
             "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => email.value = $event)
           }, null, 512), [
@@ -6027,7 +6027,7 @@ const _sfc_main$3 = {
         ]),
         withDirectives(createBaseVNode("textarea", {
           required: "",
-          class: "block resize-none placeholder-gray-500 mt-3 py-2 px-3 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
+          class: "block resize-none placeholder-gray-500 mt-3 py-2 px-3 w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
           rows: "5",
           placeholder: __props.comment ? `\u56DE\u590D @${__props.comment.name}\uFF1A` : "\u8BF7\u53D1\u8868\u60A8\u7684\u89C1\u89E3\uFF1A",
           "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => content.value = $event)
