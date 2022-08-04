@@ -1,3 +1,4 @@
+var windi = "";
 function makeMap(str, expectsLowerCase) {
   const map = Object.create(null);
   const list = str.split(",");
@@ -4991,14 +4992,14 @@ var cookies$1 = utils$a.isStandardBrowserEnv() ? function standardBrowserEnv() {
 var isAbsoluteURL$1 = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
 };
-var combineURLs$1 = function combineURLs(baseURL, relativeURL) {
-  return relativeURL ? baseURL.replace(/\/+$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
+var combineURLs$1 = function combineURLs(baseURL2, relativeURL) {
+  return relativeURL ? baseURL2.replace(/\/+$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL2;
 };
 var isAbsoluteURL2 = isAbsoluteURL$1;
 var combineURLs2 = combineURLs$1;
-var buildFullPath$1 = function buildFullPath(baseURL, requestedURL) {
-  if (baseURL && !isAbsoluteURL2(requestedURL)) {
-    return combineURLs2(baseURL, requestedURL);
+var buildFullPath$1 = function buildFullPath(baseURL2, requestedURL) {
+  if (baseURL2 && !isAbsoluteURL2(requestedURL)) {
+    return combineURLs2(baseURL2, requestedURL);
   }
   return requestedURL;
 };
@@ -5967,7 +5968,7 @@ const _sfc_main$3 = {
     name.value = localStorage.getItem("name");
     email.value = localStorage.getItem("email");
     function postComment() {
-      axios.post("/api/v0/comments", {
+      axios.post(`${baseURL}/api/v0/comments`, {
         articleID,
         parentID: (() => {
           if (props.comment && props.comment.parentID) {
@@ -6090,7 +6091,7 @@ const _sfc_main$1 = {
   setup(__props) {
     const props = __props;
     const childComments = ref([]);
-    const getChildComments = () => axios.get(`/api/v0/comments/${props.comment.articleID}?parentID=${props.comment.id}`).then((resp) => childComments.value = resp.data).catch((err) => console.error(err));
+    const getChildComments = () => axios.get(`${baseURL}/api/v0/comments/${props.comment.articleID}?parentID=${props.comment.id}`).then((resp) => childComments.value = resp.data).catch((err) => console.error(err));
     getChildComments();
     provide("getChildComments", getChildComments);
     return (_ctx, _cache) => {
@@ -6114,13 +6115,22 @@ const _hoisted_1 = { class: "bg-white rounded-xl border border-solid border-[#dd
 const _sfc_main = {
   setup(__props) {
     const comments = ref([]);
-    const getComments = () => axios.get(`/api/v0/comments/${articleID}?parentID=0&sort=id&orderBy=DESC`).then((resp) => comments.value = resp.data).catch((err) => console.error(err));
-    getComments();
+    async function getComments() {
+      try {
+        const resp = await axios.get(`${baseURL}/api/v0/comments/${articleID}?parentID=0&sort=id&orderBy=DESC`);
+        comments.value = resp.data;
+      } catch (err) {
+        console.error(err);
+      }
+    }
     provide("getComments", getComments);
     const visibleReply = ref(0);
     const toggleReply = (id) => visibleReply.value = visibleReply.value === id ? 0 : id;
     provide("visibleReply", visibleReply);
     provide("toggleReply", toggleReply);
+    onMounted(async () => {
+      await getComments();
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
         createVNode(_sfc_main$3, { class: "my-8" }),
@@ -6134,7 +6144,7 @@ const _sfc_main = {
     };
   }
 };
-var windi = "";
 const articleID = document.getElementById("comment").dataset.articleId;
+const baseURL = document.getElementById("comment").dataset.baseUrl;
 createApp(_sfc_main).mount("#comment");
-export { articleID };
+export { articleID, baseURL };

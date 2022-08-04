@@ -1,14 +1,15 @@
 <script setup>
-import { provide, ref } from 'vue'
-import CommentBase from './CommentBase.vue'
 import axios from 'axios'
+import { provide, ref } from 'vue'
+import { baseURL } from "../main"
+import CommentBase from './CommentBase.vue'
 
 const props = defineProps({
     comment: Object
 })
 
 const childComments = ref([])
-const getChildComments = () => axios.get(`/api/v0/comments/${props.comment.articleID}?parentID=${props.comment.id}`)
+const getChildComments = () => axios.get(`${baseURL}/api/v0/comments/${props.comment.articleID}?parentID=${props.comment.id}`)
     .then(resp => childComments.value = resp.data)
     .catch(err => console.error(err))
 getChildComments()
